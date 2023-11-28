@@ -1,95 +1,61 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import Head from "next/head";
+import { getAppData } from "../utils/helper";
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  const [dynamicManifest, setDynamicManifest] = useState(null);
+  let subdomain ='localhost';
+  if (typeof window !== "undefined") {
+    subdomain = window?.location.hostname.split(".")[0];
+  }
+  const { name, iconUrl } = getAppData(subdomain);
+  useEffect(() => {
+    // Fetch custom manifest when component mounts
+    fetchCustomManifest();
+  }, []);
+
+  const fetchCustomManifest = async () => {
+    try {
+     
+     
+      const response = await fetch('https://mocki.io/v1/25e12c24-cf13-423f-94e8-dbc70a948c3d');
+      let manifestData = await response.json();
+      
+      console.log('manifestData',manifestData[subdomain]);
+      setDynamicManifest(manifestData[subdomain]);
+     
+      
+    } catch (error) {
+      console.error("Error fetching custom manifest:", error);
+    }
+  };
+  // Fetch app data based on the subdomain
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <div>
+      <Head>
+      {dynamicManifest &&
+      <> 
+        <title>{name}</title>
+      
+        <link rel="manifest" href={dynamicManifest} />
+        <meta
+          name="description"
+          content={`${name} - Customized for ${subdomain}`}
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <link rel="manifest" href="/manifest.json" />
+        
+        <link rel="icon" href={iconUrl} />
+        <meta name="apple-mobile-web-app-title" content={name} />
+        <meta name="application-name" content={name} />
+        </>
+      }
+      </Head>
+      <main>
+        <h1>Hello, {name}!</h1>
+        {/* Rest of your app */}
+      </main>
+    </div>
+  );
 }
