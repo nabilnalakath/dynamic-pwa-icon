@@ -15,7 +15,7 @@ export async function generateMetadata() {
   console.log('manifestData',manifestData[subdomain]);
   let dynamicManifest = manifestData[subdomain];
   return {
-    title: 'helloapp',
+    title: dynamicManifest.name,
     manifest:dynamicManifest
   }
 }
