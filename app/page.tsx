@@ -18,7 +18,7 @@ export default function Home() {
 
     "name": "new app",
     "short_name": "new App",
-    "start_url": "index.html",
+    "start_url": "/",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#000000",
