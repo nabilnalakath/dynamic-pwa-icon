@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 
 export default function Home() {
   const [dynamicManifest, setDynamicManifest] = useState(null);
+  const [name,setName] = useState("site name");
   let subdomain ='localhost';
   if (typeof window !== "undefined") {
     subdomain = window?.location.hostname.split(".")[0];
   }
-  const { name, iconUrl } = getAppData(subdomain);
   useEffect(() => {
     // Fetch custom manifest when component mounts
     fetchCustomManifest();
@@ -44,9 +44,7 @@ export default function Home() {
           name="description"
           content={`${name} - Customized for ${subdomain}`}
         />
-        <link rel="manifest" href="/manifest.json" />
         
-        <link rel="icon" href={iconUrl} />
         <meta name="apple-mobile-web-app-title" content={name} />
         <meta name="application-name" content={name} />
         </>
