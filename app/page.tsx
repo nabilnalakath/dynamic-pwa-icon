@@ -16,8 +16,8 @@ export default function Home() {
   const updateManifest = () => {
     const manifestDetails = {
 
-    "name": "My Web App",
-    "short_name": "My App",
+    "name": "new app",
+    "short_name": "new App",
     "start_url": "index.html",
     "display": "standalone",
     "orientation": "portrait",
@@ -40,8 +40,8 @@ reactManifest.update(manifestDetails, "#manifest-placeholder")
 
   useEffect(() => {
     // Fetch custom manifest when component mounts
-    fetchCustomManifest();
-  // updateManifest
+    //fetchCustomManifest();
+  updateManifest
   }, []);
 
   const fetchCustomManifest = async () => {
