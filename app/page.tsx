@@ -40,8 +40,8 @@ reactManifest.update(manifestDetails, "#manifest-placeholder")
 
   useEffect(() => {
     // Fetch custom manifest when component mounts
-   // fetchCustomManifest();
-   updateManifest
+    fetchCustomManifest();
+  // updateManifest
   }, []);
 
   const fetchCustomManifest = async () => {
