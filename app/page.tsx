@@ -48,7 +48,7 @@ reactManifest.update(manifestDetails, "#manifest-placeholder")
     try {
      
       let dynamicManifest;
-      const response = await fetch('https://mocki.io/v1/8681f059-86ee-404b-ab84-56e8097fea9c');
+      const response = await fetch('https://mocki.io/v1/be970942-ead8-45de-8723-8f44a3ba411b');
       let manifestData = await response.json();
       
       console.log('manifestData',manifestData[subdomain]);
