@@ -25,7 +25,7 @@ export default function Home() {
     "background_color": "#ffffff",
     "icons": [
       {
-        "src": "https://images.placeholders.dev/?width=200&height=200&text=cc%201%20app&textColor=red",
+        "src": "https://images.placeholders.dev/?width=200&height=200&text=cc%201%20app&textColor=blue",
         "sizes": "192x192",
         "type": "image/png"
         },
