@@ -19,7 +19,7 @@ export default function Home() {
     try {
      
      
-      const response = await fetch('https://mocki.io/v1/54e9ca11-3c1b-4944-a1e2-6c77c3250e98');
+      const response = await fetch('https://mocki.io/v1/8fbe1c94-9397-4b77-8fac-85a446baff6b');
       let manifestData = await response.json();
       
       console.log('manifestData',manifestData[subdomain]);
